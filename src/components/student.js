@@ -22,7 +22,7 @@ export default function Student() {
     const handleClick = async (e) => {
         e.preventDefault()
         const student = { firstName, lastName, indexNumber }
-        await fetch("https://student-repository-backend.herokuapp.com/api/student", {
+        await fetch("https://student-repository-backend.azurewebsites.net", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(student)
@@ -35,7 +35,7 @@ export default function Student() {
     const HandleSearchClick = async (e) => {
         e.preventDefault()
 
-        const response = await fetch("https://student-repository-backend.herokuapp.com/api/student", {
+        const response = await fetch("https://student-repository-backend.azurewebsites.net", {
             method: "GET"
         })
 
@@ -49,7 +49,7 @@ export default function Student() {
 
         const student = { id: id, firstName: updateFirstName, lastName: updateLastName, indexNumber: updateIndex }
         console.log(id)
-        await fetch("https://student-repository-backend.herokuapp.com/api/student", {
+        await fetch("https://student-repository-backend.azurewebsites.net", {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(student)
@@ -61,7 +61,7 @@ export default function Student() {
     const HandleDeleteClick = async (e, id) => {
         e.preventDefault()
 
-        await fetch(`https://student-repository-backend.herokuapp.com/api/student/${id}`, {
+        await fetch(`https://student-repository-backend.azurewebsites.net/${id}`, {
             method: "DELETE"
         }).then(() => {
             console.log(`Student with ID: ${id} has been deleted`)
