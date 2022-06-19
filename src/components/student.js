@@ -22,7 +22,7 @@ export default function Student() {
     const handleClick = async (e) => {
         e.preventDefault()
         const student = { firstName, lastName, indexNumber }
-        await fetch("http://localhost:8080/api/student", {
+        await fetch("https://student-repository-backend.herokuapp.com/api/student", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(student)
@@ -35,7 +35,7 @@ export default function Student() {
     const HandleSearchClick = async (e) => {
         e.preventDefault()
 
-        const response = await fetch("http://localhost:8080/api/student", {
+        const response = await fetch("https://student-repository-backend.herokuapp.com/api/student", {
             method: "GET"
         })
 
@@ -49,7 +49,7 @@ export default function Student() {
 
         const student = { id: id, firstName: updateFirstName, lastName: updateLastName, indexNumber: updateIndex }
         console.log(id)
-        await fetch("http://localhost:8080/api/student", {
+        await fetch("https://student-repository-backend.herokuapp.com/api/student", {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(student)
@@ -61,7 +61,7 @@ export default function Student() {
     const HandleDeleteClick = async (e, id) => {
         e.preventDefault()
 
-        await fetch(`http://localhost:8080/api/student/${id}`, {
+        await fetch(`https://student-repository-backend.herokuapp.com/api/student/${id}`, {
             method: "DELETE"
         }).then(() => {
             console.log(`Student with ID: ${id} has been deleted`)
@@ -121,8 +121,6 @@ export default function Student() {
                     <Button variant="contained" color="success" onClick={(e) => HandleUpdateClick(e, id)} style={{ marginTop: "10px" }}>
                         Update Student
                     </Button>
-
-
                 </Box>
             </Popup>
 
