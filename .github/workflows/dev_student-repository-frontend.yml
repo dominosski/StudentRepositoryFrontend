@@ -25,13 +25,14 @@ jobs:
         run: |
           npm install
           npm run build --if-present
-          npm run test --if-present
+      - name: Zip artifact for deployment
+        run: Compress-Archive . release.zip
       
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: node-app
-          path: .
+          path: release.zip
 
   deploy:
     runs-on: ubuntu-latest
@@ -45,12 +46,15 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: node-app
-
+          
+      - name: unzip artifact for deployment
+        run: unzip release.zip
+        
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
         id: deploy-to-webapp
         with:
           app-name: 'student-repository-frontend'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_4678CC1C7569425394412BD9292288B6 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_773A26BCBAAE4493B3F602D840840BD3 }}
           package: .
